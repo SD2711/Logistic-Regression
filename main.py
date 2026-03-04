@@ -27,31 +27,23 @@ df["Class01"] = (df["Classification"] == 2).astype(int)
 X = df[["Glucose"]].values
 y = df["Class01"].values
 
-# 7) Диаграмма рассеивания (облако точек)
-plt.figure()
-plt.scatter(df["Glucose"], df["Class01"], marker=".")
-plt.xlabel("Glucose, mg/dL")
-plt.ylabel("Class (0=Healthy, 1=Patient)")
-plt.title("Однофакторная модель: Glucose -> Class")
-plt.grid(True)
-plt.show()
 
-# 8) Train/test split
+# 7) Train/test split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=9, stratify=y
 )
 print("X_train:", X_train.shape, "y_train:", y_train.shape)
 print("X_test:", X_test.shape, "y_test:", y_test.shape)
 
-# 9) Обучение модели LogisticRegression
+# 8) Обучение модели LogisticRegression
 log1 = LogisticRegression()
 log1.fit(X_train, y_train)
 
-# 10) Проверка на нескольких наблюдениях тестовой выборки
+# 9) Проверка на нескольких наблюдениях тестовой выборки
 print("\nПример истинных y_test[:5]:", y_test[:5])
 print("Пример предсказаний model.predict(X_test[:5]):", log1.predict(X_test[:5]))
 
-# 11) Коэффициенты модели
+# 10) Коэффициенты модели
 print("\nКоэффициенты (w):", log1.coef_)
 print("Свободный член (b):", log1.intercept_)
 
